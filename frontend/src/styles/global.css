@@ -15,7 +15,7 @@ html, body, #root {
 }
 
 body {
-  font-family:romantica;
+  font-family: 'Quicksand', sans-serif;
   background: var(--primary-color);
   color: var(--text-color);
   line-height: 1.5;
