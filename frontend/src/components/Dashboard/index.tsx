@@ -82,7 +82,7 @@ const Dashboard = () => {
       </main>
 
       <footer className="dashboard-footer">
-        <p>Developed for MBRSC Hackathon</p>
+        <p>Developed for Zayed University Hackathon</p>
       </footer>
     </div>
   );

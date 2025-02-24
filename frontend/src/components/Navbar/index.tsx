@@ -58,6 +58,7 @@ const Navbar = ({ setShowMap }: NavbarProps) => {
             className="check-area-btn"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => setShowMap(true)}
           >
             Check My Area
           </motion.button>

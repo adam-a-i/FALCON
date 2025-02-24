@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import Navbar from '../Navbar';
 import './styles.css';
+import { ReactNode } from 'react';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   setShowMap: (show: boolean) => void;
 }
 
@@ -17,6 +18,9 @@ const Layout = ({ children, setShowMap }: LayoutProps) => {
         transition={{ duration: 0.5 }}
       >
         {children}
+        <footer className="dashboard-footer">
+          <p>Developed for Zayed University Hackathon</p>
+        </footer>
       </motion.main>
     </div>
   );
