@@ -1,0 +1,166 @@
+.dashboard {
+  width: 100%;
+  height: 100vh;
+  background: #1a1a2e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 60px);
+  margin-top: 60px;
+  overflow: hidden;
+}
+
+.map-section {
+  position: relative;
+  background: #16213e;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Make sure map takes full height */
+.map-section .map-container,
+.map-section .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 12px;
+}
+
+.map-legend {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.dot.high { background: #ff3b30; }
+.dot.moderate { background: #ff9500; }
+.dot.safe { background: #34c759; }
+
+.data-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.metrics-section, .alerts-section {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.metric-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+  height: 8px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.progress {
+  background: #00a8ff;
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.status.rising {
+  background: rgba(255, 149, 0, 0.2);
+  color: #ff9500;
+}
+
+.severity {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.severity.high {
+  background: rgba(255, 59, 48, 0.2);
+  color: #ff3b30;
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alert-item {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.alert-icon {
+  font-size: 20px;
+}
+
+.alert-content p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.alert-content small {
+  color: #888;
+  font-size: 12px;
+}
+
+.dashboard-footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-section {
+    height: 400px;
+  }
+} 
