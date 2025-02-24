@@ -63,9 +63,14 @@
   backdrop-filter: blur(10px);
   width: 300px;
   z-index: 1000;
+  max-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
 }
 
 .summary-btn {
+  position: sticky;
+  top: 0;
   background: var(--accent-color);
   color: white;
   border: none;
@@ -79,6 +84,7 @@
   margin-bottom: 10px;
   width: 100%;
   justify-content: center;
+  z-index: 2;
 }
 
 .summary-btn:hover {
@@ -382,4 +388,27 @@
 
 .emergency-call-btn:hover {
   background: #ff2419;
+}
+
+/* Make content scrollable */
+.map-controls-content {
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: -10px;
+  flex: 1;
+}
+
+/* Style scrollbar */
+.map-controls-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.map-controls-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.map-controls-content::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 3px;
 } 

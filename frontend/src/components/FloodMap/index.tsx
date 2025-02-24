@@ -302,34 +302,36 @@ const FloodMap = () => {
         >
           {isSpeaking ? '🔊 Stop Speaking' : '🔊 Read Summary'}
         </button>
-        <div className="summary-text">
-          {summary}
-        </div>
-        <div className="insights-section">
-          <h4>Actionable Insights</h4>
-          <div className="insight-category">
-            <h5>🚨 Immediate Actions</h5>
-            <ul>
-              {insights.immediate.map((action, i) => (
-                <li key={i}>{action}</li>
-              ))}
-            </ul>
+        <div className="map-controls-content">
+          <div className="summary-text">
+            {summary}
           </div>
-          <div className="insight-category">
-            <h5>⚡ Short-term Actions</h5>
-            <ul>
-              {insights.shortTerm.map((action, i) => (
-                <li key={i}>{action}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="insight-category">
-            <h5>🔄 Preventive Measures</h5>
-            <ul>
-              {insights.preventive.map((action, i) => (
-                <li key={i}>{action}</li>
-              ))}
-            </ul>
+          <div className="insights-section">
+            <h4>Actionable Insights</h4>
+            <div className="insight-category">
+              <h5>🚨 Immediate Actions</h5>
+              <ul>
+                {insights.immediate.map((action, i) => (
+                  <li key={i}>{action}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="insight-category">
+              <h5>⚡ Short-term Actions</h5>
+              <ul>
+                {insights.shortTerm.map((action, i) => (
+                  <li key={i}>{action}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="insight-category">
+              <h5>🔄 Preventive Measures</h5>
+              <ul>
+                {insights.preventive.map((action, i) => (
+                  <li key={i}>{action}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
