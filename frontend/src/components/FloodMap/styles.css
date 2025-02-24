@@ -56,12 +56,43 @@
 .map-controls {
   position: absolute;
   top: 20px;
-  left: 20px;
-  z-index: 1000;
+  right: 20px;
   background: rgba(0, 0, 0, 0.8);
-  padding: 15px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 12px;
   backdrop-filter: blur(10px);
+  width: 300px;
+  z-index: 1000;
+}
+
+.summary-btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.summary-btn:hover {
+  background: #0090e0;
+}
+
+.summary-text {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
 }
 
 .alerts-panel {
@@ -267,4 +298,88 @@
 .historical-data p {
   font-size: 0.9rem;
   color: #ccc;
+}
+
+.insights-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.insights-section h4 {
+  color: var(--accent-color);
+  margin-bottom: 15px;
+}
+
+.insight-category {
+  margin-bottom: 15px;
+}
+
+.insight-category h5 {
+  color: #fff;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.insight-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.insight-category li {
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #ddd;
+}
+
+.insight-category li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-marker:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.emergency-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emergency-icon {
+  font-size: 24px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
+
+.emergency-call-btn {
+  background: #ff3b30;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.emergency-call-btn:hover {
+  background: #ff2419;
 } 

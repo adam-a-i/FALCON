@@ -4,7 +4,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.heat';
 import './styles.css';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { civilDefenseLocations } from '../../data/civilDefenseData';
 
 // Fix marker icon issue
 const defaultIcon = L.icon({
@@ -27,6 +28,41 @@ const getRiskColor = (level: string) => {
     case 'low': return '#34c759';
     default: return '#00a8ff';
   }
+};
+
+const createPriorityIcon = (priority: number) => {
+  const color = priority === 1 ? '#ff3b30' :  // High priority - Red
+                priority === 2 ? '#ff9500' :   // Medium priority - Orange
+                '#34c759';                     // Low priority - Green
+
+  return L.divIcon({
+    className: 'custom-marker',
+    html: `
+      <div style="
+        background-color: ${color};
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 0 4px rgba(0,0,0,0.5);
+      "></div>
+    `,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12],
+  });
+};
+
+const createEmergencyIcon = () => {
+  return L.divIcon({
+    className: 'emergency-marker',
+    html: `
+      <div class="emergency-icon">🚑</div>
+    `,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [0, -15],
+  });
 };
 
 const FloodOverlay = () => {
@@ -103,7 +139,79 @@ const FloodOverlay = () => {
   return null;
 };
 
+const generateSummary = (zones: typeof mockFloodZones) => {
+  const highRiskCount = zones.filter(z => z.riskLevel === 'high').length;
+  const mediumRiskCount = zones.filter(z => z.riskLevel === 'medium').length;
+  const lowRiskCount = zones.filter(z => z.riskLevel === 'low').length;
+
+  return `Current Flood Status Summary: There are ${highRiskCount} high-risk areas, ${mediumRiskCount} medium-risk areas, and ${lowRiskCount} low-risk areas. ${
+    highRiskCount > 0 ? 'Immediate attention required in ' + zones.filter(z => z.riskLevel === 'high').map(z => z.location).join(', ') + '.' : ''
+  }`;
+};
+
+const generateInsights = (zones: typeof mockFloodZones) => {
+  const highRiskZones = zones.filter(z => z.riskLevel === 'high');
+  const urbanZones = highRiskZones.filter(z => z.priority === 1);
+  const desertZones = highRiskZones.filter(z => z.priority > 1);
+
+  return {
+    immediate: [
+      ...urbanZones.map(z => `Evacuate basement levels in ${z.location}`),
+      ...desertZones.map(z => `Close desert roads near ${z.location}`),
+      'Deploy emergency response teams to high-risk areas',
+    ],
+    shortTerm: [
+      'Activate emergency drainage systems',
+      'Alert residents in affected areas via SMS',
+      'Prepare emergency shelters',
+    ],
+    preventive: [
+      'Monitor weather radar for additional rainfall',
+      'Check infrastructure integrity in affected areas',
+      'Prepare sandbags and emergency supplies',
+    ]
+  };
+};
+
 const FloodMap = () => {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const handleSpeak = (text: string) => {
+    if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+
+      if (isSpeaking) {
+        setIsSpeaking(false);
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      // Configure the speech
+      utterance.rate = 0.9;  // Slightly slower
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      utterance.lang = 'en-US';
+
+      // Add event handlers
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => {
+        console.error('Speech synthesis error');
+        setIsSpeaking(false);
+      };
+
+      // Speak
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Text-to-speech is not supported in your browser');
+    }
+  };
+
+  const insights = generateInsights(mockFloodZones);
+  const summary = generateSummary(mockFloodZones);
+
   return (
     <div className="map-container">
       <MapContainer
@@ -117,10 +225,32 @@ const FloodMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FloodOverlay />
+        
+        {/* Add Civil Defense Markers */}
+        {civilDefenseLocations.map((location) => (
+          <Marker
+            key={`emergency-${location.id}`}
+            position={[location.latitude, location.longitude]}
+            icon={createEmergencyIcon()}
+          >
+            <Popup className="custom-popup">
+              <h3>{location.name}</h3>
+              <p>Emergency Contact: {location.contact}</p>
+              <button 
+                className="emergency-call-btn"
+                onClick={() => window.open(`tel:${location.contact}`)}
+              >
+                📞 Call Emergency Services
+              </button>
+            </Popup>
+          </Marker>
+        ))}
+
         {mockFloodZones.map((zone) => (
           <Marker 
             key={zone.id}
             position={[zone.latitude, zone.longitude]}
+            icon={createPriorityIcon(zone.priority)}
           >
             <Popup className="custom-popup">
               <h3>{zone.location}</h3>
@@ -164,6 +294,45 @@ const FloodMap = () => {
           </Marker>
         ))}
       </MapContainer>
+      
+      <div className="map-controls">
+        <button 
+          className="summary-btn"
+          onClick={() => handleSpeak(summary)}
+        >
+          {isSpeaking ? '🔊 Stop Speaking' : '🔊 Read Summary'}
+        </button>
+        <div className="summary-text">
+          {summary}
+        </div>
+        <div className="insights-section">
+          <h4>Actionable Insights</h4>
+          <div className="insight-category">
+            <h5>🚨 Immediate Actions</h5>
+            <ul>
+              {insights.immediate.map((action, i) => (
+                <li key={i}>{action}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="insight-category">
+            <h5>⚡ Short-term Actions</h5>
+            <ul>
+              {insights.shortTerm.map((action, i) => (
+                <li key={i}>{action}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="insight-category">
+            <h5>🔄 Preventive Measures</h5>
+            <ul>
+              {insights.preventive.map((action, i) => (
+                <li key={i}>{action}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
