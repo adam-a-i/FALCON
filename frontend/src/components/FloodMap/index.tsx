@@ -294,6 +294,56 @@ const findNearestFloodZone = (
   return sortedZones[0];
 };
 
+const MapLegend = () => {
+  return (
+    <div className="map-legend">
+      <h4>Map Legend</h4>
+      <div className="legend-section">
+        <h5>Emergency Services</h5>
+        <div className="legend-item">
+          <div className="legend-icon">🚑</div>
+          <span>Emergency Medical Services</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-icon">🚒</div>
+          <span>Civil Defense Unit</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-icon">🚓</div>
+          <span>Police Unit</span>
+        </div>
+      </div>
+
+      <div className="legend-section">
+        <h5>Flood Risk Zones</h5>
+        <div className="legend-item">
+          <div className="legend-dot high"></div>
+          <span>High Risk</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot medium"></div>
+          <span>Medium Risk</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot low"></div>
+          <span>Low Risk</span>
+        </div>
+      </div>
+
+      <div className="legend-section">
+        <h5>Heat Map</h5>
+        <div className="legend-gradient">
+          <div className="gradient-bar"></div>
+          <div className="gradient-labels">
+            <span>Low</span>
+            <span>High</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const FloodMap = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
@@ -346,6 +396,7 @@ const FloodMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FloodOverlay />
+        <MapLegend />
 
         {/* Split locations between ambulances, fire trucks, and police cars */}
         {civilDefenseLocations.map((location, index) => {
