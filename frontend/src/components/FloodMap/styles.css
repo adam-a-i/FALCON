@@ -50,7 +50,8 @@
 }
 
 .leaflet-tile {
-  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3)
+    brightness(0.7);
 }
 
 .map-controls {
@@ -367,7 +368,7 @@
 
 .emergency-icon {
   font-size: 24px;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
 }
 
 .emergency-call-btn {
@@ -411,4 +412,36 @@
 .map-controls-content::-webkit-scrollbar-thumb {
   background: var(--accent-color);
   border-radius: 3px;
-} 
+}
+
+.civil-defense-icon {
+  font-size: 24px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+.civil-defense-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.civil-defense-marker:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.police-icon {
+  font-size: 24px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+.police-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.police-marker:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}

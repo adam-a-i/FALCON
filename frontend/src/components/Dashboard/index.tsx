@@ -1,12 +1,12 @@
-import Navbar from '../Navbar';
-import FloodMap from '../FloodMap';
-import './styles.css';
+import Navbar from "../Navbar";
+import FloodMap from "../FloodMap";
+import "./styles.css";
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
       <Navbar />
-      
+
       <main className="dashboard-content">
         <div className="map-section">
           <FloodMap />
@@ -30,13 +30,13 @@ const Dashboard = () => {
         <div className="data-panel">
           <section className="metrics-section">
             <h3>Key Metrics</h3>
-            
+
             <div className="metric-card">
               <h4>Rainfall Level</h4>
               <div className="progress-bar">
-                <div className="progress" style={{ width: '70%' }}></div>
+                <div className="progress" style={{ width: "70%" }}></div>
               </div>
-              <p>50mm/hr</p>
+              <p>178 mm</p>
             </div>
 
             <div className="metric-card">
@@ -88,4 +88,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard; 
+export default Dashboard;

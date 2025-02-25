@@ -2,14 +2,14 @@ export const civilDefenseLocations = [
   {
     id: 1,
     name: "Dubai Civil Defence Headquarters",
-    latitude: 25.2307,
-    longitude: 55.2840,
+    latitude: 25.2048,
+    longitude: 55.2708,
     contact: "997",
   },
   {
     id: 2,
     name: "Abu Dhabi Civil Defense General Directorate",
-    latitude: 24.4539,
+    latitude: 24.4839,
     longitude: 54.3773,
     contact: "997",
   },
@@ -17,14 +17,14 @@ export const civilDefenseLocations = [
     id: 3,
     name: "Sharjah Civil Defense Department",
     latitude: 25.3463,
-    longitude: 55.4209,
+    longitude: 55.3914,
     contact: "997",
   },
   {
     id: 4,
     name: "Ajman Civil Defense",
-    latitude: 25.4052,
-    longitude: 55.5136,
+    latitude: 25.3989,
+    longitude: 55.4776,
     contact: "997",
   },
   {
@@ -38,7 +38,7 @@ export const civilDefenseLocations = [
     id: 6,
     name: "Dubai Civil Defence - Al Qusais Station",
     latitude: 25.2744,
-    longitude: 55.3753,
+    longitude: 55.3553,
     contact: "997",
   },
   {
@@ -47,5 +47,26 @@ export const civilDefenseLocations = [
     latitude: 25.1287,
     longitude: 55.2309,
     contact: "997",
-  }
-]; 
+  },
+  {
+    id: 8,
+    name: "Al Ain Civil Defense Station",
+    latitude: 24.1917,
+    longitude: 55.7606,
+    contact: "997",
+  },
+  {
+    id: 9,
+    name: "Fujairah Civil Defense Department",
+    latitude: 25.1234,
+    longitude: 56.3272,
+    contact: "997",
+  },
+  {
+    id: 10,
+    name: "Umm Al Quwain Civil Defense",
+    latitude: 25.5646,
+    longitude: 55.5532,
+    contact: "997",
+  },
+];
